@@ -6,10 +6,6 @@ This is a Spring Boot-based application designed to manage exam scores by loadin
 - **Java 17**: Ensure JDK 17 is installed (`java -version` to check).
 - **Maven 3.6+**: Build tool for managing dependencies (`mvn -version` to check).
 - **Git**: For version control and cloning the repository.
-- **Optional Dependencies**:
-  - AWS SDK for S3 integration.
-  - Google Cloud Storage SDK for GCS integration.
-  - DigitalOcean Spaces SDK (uses AWS S3 compatibility).
 
 ## Installation
 

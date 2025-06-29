@@ -10,6 +10,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -19,6 +22,9 @@ public class CsvDataLoader implements CommandLineRunner {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager; // Inject EntityManager
 
     @Override
     @Transactional
@@ -46,11 +52,11 @@ public class CsvDataLoader implements CommandLineRunner {
                 studentRepository.save(student);
                 count++;
                 if (count % batchSize == 0) {
-                    studentRepository.flush(); // Flush để commit batch
-                    studentRepository.clear(); // Clear persistence context
+                    entityManager.flush(); // Flush để commit batch
+                    entityManager.clear(); // Clear persistence context
                 }
             }
-            studentRepository.flush(); // Flush lần cuối
+            entityManager.flush(); // Flush lần cuối
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }

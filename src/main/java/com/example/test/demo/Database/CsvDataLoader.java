@@ -40,7 +40,7 @@ public class CsvDataLoader implements CommandLineRunner {
             String[] record;
             int batchSize = 50; // Số bản ghi mỗi batch
             int count = 0;
-            int maxRecords = 1000; // Giới hạn số bản ghi để test
+            int maxRecords = 5000; // Giới hạn số bản ghi để test
             while ((record = csvReader.readNext()) != null && count < maxRecords) {
                 if (record.length < 10) {
                     logger.error("Invalid record at line {}: insufficient columns", count + 2);

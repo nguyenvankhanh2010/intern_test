@@ -20,7 +20,7 @@ public class CsvDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String csvFile = "diem_thi_thpt_2024.csv";
+        String csvFile = "src/main/resources/diem_thi_thpt_2024.csv";
         try (CSVReader csvReader = new CSVReader(new FileReader(csvFile))) {
             csvReader.readNext(); // Skip header
             String[] record;

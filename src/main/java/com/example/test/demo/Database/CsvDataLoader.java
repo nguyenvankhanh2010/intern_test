@@ -1,16 +1,16 @@
 package com.example.test.demo.Database;
 
-
 import com.example.test.demo.Model.Student;
 import com.example.test.demo.Repository.StudentRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 @Component
 public class CsvDataLoader implements CommandLineRunner {
@@ -20,8 +20,9 @@ public class CsvDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String csvFile = "src/main/resources/diem_thi_thpt_2024.csv";
-        try (CSVReader csvReader = new CSVReader(new FileReader(csvFile))) {
+        ClassPathResource resource = new ClassPathResource("diem_thi_thpt_2024.csv");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()));
+             CSVReader csvReader = new CSVReader(br)) {
             csvReader.readNext(); // Skip header
             String[] record;
             while ((record = csvReader.readNext()) != null) {

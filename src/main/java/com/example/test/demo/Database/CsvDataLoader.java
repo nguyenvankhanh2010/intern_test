@@ -29,15 +29,15 @@ public class CsvDataLoader implements CommandLineRunner {
             while ((record = csvReader.readNext()) != null) {
                 Student student = new Student();
                 student.setRegistrationNumber(record[0]);
-                student.setMath(record[1].isEmpty() ? null : Float.parseFloat(record[1]));
-                student.setLiterature(record[2].isEmpty() ? null : Float.parseFloat(record[2]));
-                student.setEnglish(record[3].isEmpty() ? null : Float.parseFloat(record[3]));
-                student.setPhysics(record[4].isEmpty() ? null : Float.parseFloat(record[4]));
-                student.setChemistry(record[5].isEmpty() ? null : Float.parseFloat(record[5]));
-                student.setBiology(record[6].isEmpty() ? null : Float.parseFloat(record[6]));
-                student.setHistory(record[7].isEmpty() ? null : Float.parseFloat(record[7]));
-                student.setGeography(record[8].isEmpty() ? null : Float.parseFloat(record[8]));
-                student.setCiviceducation(record[9].isEmpty() ? null : Float.parseFloat(record[9]));
+                student.setMath(record[1].isEmpty() ? 0f : Float.parseFloat(record[1]));
+                student.setLiterature(record[2].isEmpty() ? 0f : Float.parseFloat(record[2]));
+                student.setEnglish(record[3].isEmpty() ? 0f : Float.parseFloat(record[3]));
+                student.setPhysics(record[4].isEmpty() ? 0f : Float.parseFloat(record[4]));
+                student.setChemistry(record[5].isEmpty() ? 0f : Float.parseFloat(record[5]));
+                student.setBiology(record[6].isEmpty() ? 0f : Float.parseFloat(record[6]));
+                student.setHistory(record[7].isEmpty() ? 0f : Float.parseFloat(record[7]));
+                student.setGeography(record[8].isEmpty() ? 0f : Float.parseFloat(record[8]));
+                student.setCiviceducation(record[9].isEmpty() ? 0f : Float.parseFloat(record[9]));
 
                 studentRepository.save(student);
             }

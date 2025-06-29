@@ -24,7 +24,7 @@ public class CsvDataLoader implements CommandLineRunner {
     private StudentRepository studentRepository;
 
     @PersistenceContext
-    private EntityManager entityManager; // Inject EntityManager
+    private EntityManager entityManager;
 
     @Override
     @Transactional
@@ -34,7 +34,7 @@ public class CsvDataLoader implements CommandLineRunner {
              CSVReader csvReader = new CSVReader(br)) {
             csvReader.readNext(); // Skip header
             String[] record;
-            int batchSize = 100; // Số bản ghi mỗi batch
+            int batchSize = 50; // Giảm batch size để thử
             int count = 0;
             while ((record = csvReader.readNext()) != null) {
                 Student student = new Student();
@@ -52,11 +52,11 @@ public class CsvDataLoader implements CommandLineRunner {
                 studentRepository.save(student);
                 count++;
                 if (count % batchSize == 0) {
-                    entityManager.flush(); // Flush để commit batch
-                    entityManager.clear(); // Clear persistence context
+                    entityManager.flush();
+                    entityManager.clear();
                 }
             }
-            entityManager.flush(); // Flush lần cuối
+            entityManager.flush();
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }

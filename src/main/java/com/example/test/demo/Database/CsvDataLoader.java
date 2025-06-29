@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.IOException; // Thêm import này
 
 @Component
 public class CsvDataLoader implements CommandLineRunner {

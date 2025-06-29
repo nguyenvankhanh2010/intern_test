@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.IOException; // Thêm import này
+import java.io.IOException;
 
 @Component
 public class CsvDataLoader implements CommandLineRunner {
@@ -20,12 +21,15 @@ public class CsvDataLoader implements CommandLineRunner {
     private StudentRepository studentRepository;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         ClassPathResource resource = new ClassPathResource("diem_thi_thpt_2024.csv");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()));
              CSVReader csvReader = new CSVReader(br)) {
             csvReader.readNext(); // Skip header
             String[] record;
+            int batchSize = 100; // Số bản ghi mỗi batch
+            int count = 0;
             while ((record = csvReader.readNext()) != null) {
                 Student student = new Student();
                 student.setRegistrationNumber(record[0]);
@@ -40,7 +44,12 @@ public class CsvDataLoader implements CommandLineRunner {
                 student.setCiviceducation(record[9].isEmpty() ? 0f : Float.parseFloat(record[9]));
 
                 studentRepository.save(student);
+                count++;
+                if (count % batchSize == 0) {
+                    studentRepository.flush(); // Flush để giảm bộ nhớ
+                }
             }
+            studentRepository.flush(); // Flush lần cuối
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }

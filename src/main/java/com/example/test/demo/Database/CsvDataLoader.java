@@ -46,7 +46,8 @@ public class CsvDataLoader implements CommandLineRunner {
                 studentRepository.save(student);
                 count++;
                 if (count % batchSize == 0) {
-                    studentRepository.flush(); // Flush để giảm bộ nhớ
+                    studentRepository.flush(); // Flush để commit batch
+                    studentRepository.clear(); // Clear persistence context
                 }
             }
             studentRepository.flush(); // Flush lần cuối

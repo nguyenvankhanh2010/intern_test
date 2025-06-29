@@ -34,13 +34,13 @@ Open your browser and go to http://localhost:8080 to see the application.
 <p align="center">
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
-- **Java 17**: Check with `java -version`.
+- Search by registration number.
 <p align="center">
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
-- **Search by registration number.
+- Top 10 students in block A.
 <p align="center">
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
-- **Search by registration number.
+- Statistics of the number of students with scores.
 

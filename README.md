@@ -25,7 +25,7 @@ mvn clean package -DskipTests
 ```
 You can also go to DemoApplication and run
 
-### 2. Run the Application
+### 3. Run the Application
 ```bash
 java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```

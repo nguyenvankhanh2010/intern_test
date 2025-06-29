@@ -6,17 +6,27 @@ This is a Spring Boot-based application designed to manage exam scores by loadin
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
 
-## Features
-- Load and process large CSV files containing exam scores into an H2 database.
-- Display scores dynamically via a web interface using Thymeleaf templates.
-- Optimize memory usage with batch processing (default 50 records per batch).
-- Support for local development and deployment on cloud platforms (e.g., Render).
-- Optional integration with external storage (AWS S3, Google Cloud Storage, DigitalOcean Spaces) for handling oversized files.
-
 ## Prerequisites
-- **Java 17**: Ensure JDK 17 is installed (`java -version` to check).
-- **Maven 3.6+**: Build tool for managing dependencies (`mvn -version` to check).
-- **Git**: For version control and cloning the repository.
-- **Optional Dependencies**: AWS SDK, Google Cloud Storage SDK, or DigitalOcean Spaces SDK for external storage integration.
+- **Java 17**: Check with `java -version`.
+- **Maven 3.6+**: Check with `mvn -version`.
+- **Git**: For cloning the repository.
 
-## Installation
+## Installation and Running Locally
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/nguyenvankhanh2010/intern_test.git
+cd intern_test
+```
+
+### 2. Build the Project
+```bash
+mvn clean package -DskipTests
+```
+You can also go to DemoApplication and run
+
+### 2. Run the Application
+```bash
+java -jar target/demo-0.0.1-SNAPSHOT.jar
+```
+Open your browser and go to http://localhost:8080 to see the application.

@@ -20,27 +20,41 @@ public class CsvDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String csvFile = "src/main/resources/diem_thi_thpt_2024.csv";
-        try (CSVReader csvReader = new CSVReader(new FileReader(csvFile))) {
-            csvReader.readNext(); // Skip header
+        InputStream is = 
+            this.getClass()
+                .getClassLoader()
+                .getResourceAsStream("diem_thi_thpt_2024.csv");
+        if (is == null) {
+            throw new FileNotFoundException(
+                "Không tìm thấy diem_thi_thpt_2024.csv trên classpath");
+        }
+
+        try (CSVReader csvReader = 
+               new CSVReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+            csvReader.readNext(); // skip header
             String[] record;
             while ((record = csvReader.readNext()) != null) {
                 Student student = new Student();
                 student.setRegistrationNumber(record[0]);
-                student.setMath(record[1].isEmpty() ? null : Float.parseFloat(record[1]));
-                student.setLiterature(record[2].isEmpty() ? null : Float.parseFloat(record[2]));
-                student.setEnglish(record[3].isEmpty() ? null : Float.parseFloat(record[3]));
-                student.setPhysics(record[4].isEmpty() ? null : Float.parseFloat(record[4]));
-                student.setChemistry(record[5].isEmpty() ? null : Float.parseFloat(record[5]));
-                student.setBiology(record[6].isEmpty() ? null : Float.parseFloat(record[6]));
-                student.setHistory(record[7].isEmpty() ? null : Float.parseFloat(record[7]));
-                student.setGeography(record[8].isEmpty() ? null : Float.parseFloat(record[8]));
-                student.setCiviceducation(record[9].isEmpty() ? null : Float.parseFloat(record[9]));
-
+                student.setMath(parseFloatOrNull(record[1]));
+                student.setLiterature(parseFloatOrNull(record[2]));
+                student.setEnglish(parseFloatOrNull(record[3]));
+                student.setPhysics(parseFloatOrNull(record[4]));
+                student.setChemistry(parseFloatOrNull(record[5]));
+                student.setBiology(parseFloatOrNull(record[6]));
+                student.setHistory(parseFloatOrNull(record[7]));
+                student.setGeography(parseFloatOrNull(record[8]));
+                student.setCiviceducation(parseFloatOrNull(record[9]));
                 studentRepository.save(student);
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
+    }
+
+    private Float parseFloatOrNull(String s) {
+        return (s == null || s.isBlank())
+            ? null
+            : Float.parseFloat(s);
     }
 }

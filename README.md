@@ -1,6 +1,7 @@
 # Exam Score Management Application
 
 This is a Spring Boot-based application designed to manage exam scores by loading data from a large CSV file (`diem_thi_thpt_2024.csv`) into an H2 in-memory database and providing a web interface to view the data. The application leverages Thymeleaf for templating, supports batch processing for large datasets.
+- **Java 17**: Check with `java -version`.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
@@ -36,11 +37,11 @@ Open your browser and go to http://localhost:8080 to see the application.
 </p>
 - Search by registration number.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%215458.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
 - Top 10 students in block A.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%215507.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
 - Statistics of the number of students with scores.
 

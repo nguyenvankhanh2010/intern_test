@@ -1,7 +1,7 @@
 # Exam Score Management Application
 
 This is a Spring Boot-based application designed to manage exam scores by loading data from a large CSV file (`diem_thi_thpt_2024.csv`) into an H2 in-memory database and providing a web interface to view the data. The application leverages Thymeleaf for templating, supports batch processing for large datasets.
-- **Java 17**: Check with `java -version`.
+- **With the version we deployed the website, there were only about 5000 records because I used the free version of Render, so it was limited, but the local version worked fine.**
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">

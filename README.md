@@ -34,7 +34,7 @@ Open your browser and go to http://localhost:8080 to see the application.
 <p align="center">
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
-- **Search by registration number.
+- **Java 17**: Check with `java -version`.
 <p align="center">
   <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>

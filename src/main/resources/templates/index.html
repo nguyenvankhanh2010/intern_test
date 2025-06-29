@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Exam Score Management</title>
+    <!-- Bootstrap CSS + Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+          background: #eef2f7;
+        }
+        .nav-tabs .nav-link {
+          font-weight: 500;
+          color: #495057;
+        }
+        .nav-tabs .nav-link.active {
+          color: #fff;
+          background-color: #343a40;
+          border-color: #343a40 #343a40 #fff;
+        }
+        .card {
+          border: none;
+          border-radius: .75rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+        }
+        .card-header {
+          background: linear-gradient(90deg, #343a40, #495057);
+          color: #fff;
+          border-top-left-radius: .75rem;
+          border-top-right-radius: .75rem;
+        }
+        .form-control:focus, .input-group-text {
+          border-color: #343a40;
+          box-shadow: none;
+        }
+        .btn-dark {
+          background-color: #343a40;
+          border-color: #343a40;
+        }
+        .btn-dark:hover {
+          background-color: #495057;
+          border-color: #495057;
+        }
+        .table thead {
+          background: #343a40;
+          color: #fff;
+        }
+        #scoreChart {
+          height: 600px !important; /* Tăng chiều cao */
+        }
+        /* Style cho footer */
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            color: #495057;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
+<body>
+<div class="container py-5">
+    <h1 class="mb-4 text-center text-dark">Quản Lý Điểm Thi</h1>
+
+    <!-- Nav Tabs -->
+    <ul class="nav nav-tabs mb-4" id="mainTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab-check" data-bs-toggle="tab" data-bs-target="#pane-check" type="button" role="tab">
+                <i class="bi bi-search me-1"></i> Tra Cứu
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-top10" data-bs-toggle="tab" data-bs-target="#pane-top10" type="button" role="tab">
+                <i class="bi bi-award me-1"></i> Top 10 Nhóm A
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab-dist" data-bs-toggle="tab" data-bs-target="#pane-dist" type="button" role="tab">
+                <i class="bi bi-bar-chart-line me-1"></i> Phân Phối Điểm
+            </button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="mainTabContent">
+        <!-- Tra Cứu + Thông Tin Sinh Viên -->
+        <div class="tab-pane fade show active" id="pane-check" role="tabpanel" aria-labelledby="tab-check">
+            <!-- Form Tra cứu -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="bi bi-funnel-fill me-2"></i>Tra Cứu Điểm
+                </div>
+                <div class="card-body">
+                    <form method="post" th:action="@{/check-score}" class="row g-3 align-items-end">
+                        <div class="col-md-9">
+                            <label for="registrationNumber" class="form-label">Số Báo Danh</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-credit-card-2-front-fill"></i>
+                                </span>
+                                <input type="text" id="registrationNumber" name="registrationNumber" class="form-control" placeholder="VD: 1023456" required />
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-grid">
+                            <button type="submit" class="btn btn-dark">
+                                <i class="bi bi-search me-1"></i> Tra Cứu
+                            </button>
+                        </div>
+                    </form>
+                    <div th:if="${student == null and isPostRequest}" class="text-danger mt-3">
+                        Không tìm thấy sinh viên với số báo danh này.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông Tin Sinh Viên -->
+            <div th:if="${student != null}" class="card">
+                <div class="card-header">
+                    <i class="bi bi-person-circle me-2"></i>Thông Tin Sinh Viên
+                </div>
+                <div class="card-body">
+                    <div class="row gy-2">
+                        <div class="col-md-6">
+                            <strong>Số báo danh:</strong>
+                            <p class="mb-0" th:text="${student.registrationNumber}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Toán:</strong>
+                            <p class="mb-0" th:text="${student.math}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Văn: </strong>
+                            <p class="mb-0" th:text="${student.literature}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Ngoại Ngữ: </strong>
+                            <p class="mb-0" th:text="${student.english}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Lý:</strong>
+                            <p class="mb-0" th:text="${student.physics}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Hóa:</strong>
+                            <p class="mb-0" th:text="${student.chemistry}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Sinh:</strong>
+                            <p class="mb-0" th:text="${student.biology}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Sử:</strong>
+                            <p class="mb-0" th:text="${student.history}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>Địa:</strong>
+                            <p class="mb-0" th:text="${student.geography}"></p>
+                        </div>
+                        <div class="col-md-2">
+                            <strong>GDCD:</strong>
+                            <p class="mb-0" th:text="${student.civiceducation}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top 10 Nhóm A -->
+        <div class="tab-pane fade" id="pane-top10" role="tabpanel" aria-labelledby="tab-top10">
+            <div class="card p-4 mb-5">
+                <h3 class="card-header">Top 10 Sinh Viên (Khối A)</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>SBĐ</th>
+                            <th>Toán</th>
+                            <th>Lý</th>
+                            <th>Hóa</th>
+                            <th>Tổng</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="st : ${top10GroupA}">
+                            <td th:text="${st.registrationNumber}"></td>
+                            <td th:text="${st.math}"></td>
+                            <td th:text="${st.physics}"></td>
+                            <td th:text="${st.chemistry}"></td>
+                            <td th:text="${st.math + st.physics + st.chemistry}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phân Phối Điểm -->
+        <div class="tab-pane fade" id="pane-dist" role="tabpanel" aria-labelledby="tab-dist">
+            <div class="card h-100 p-2"> <!-- Tăng chiều cao và giảm padding -->
+                <h3 class="card-header">Phân Phối Điểm</h3>
+                <div class="card-body p-0"> <!-- Loại bỏ padding trong card-body -->
+                    <canvas id="scoreChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    Created by Nguyen Van Khanh
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        const ctx = document.getElementById('scoreChart')?.getContext('2d');
+        if (!ctx) return;
+        /*<![CDATA[*/
+        const raw = /*[[${scoreDistribution}]]*/ null || {};
+        console.log("Raw Score Data from Thymeleaf:", raw);
+        /*]]>*/
+
+        const subjects = ['math', 'physics', 'chemistry', 'history', 'literature', 'geography', 'english', 'biology', 'civiceducation'];
+        const ranges = ['>=8', '6-8', '4-6', '<4'];
+        const colors = {
+            math: 'rgba(75,192,192,0.6)',
+            physics: 'rgba(255,99,132,0.6)',
+            chemistry: 'rgba(54,162,235,0.6)',
+            literature: 'rgba(0,188,212,0.6)',
+            geography: 'rgba(100,221,23,0.6)',
+            english: 'rgba(255,159,64,0.6)',
+            biology: 'rgba(0,150,136,0.6)',
+            history: 'rgba(139,0,139,0.6)',
+            civiceducation: 'rgba(205,220,57,0.6)'
+        };
+
+        // Ánh xạ tên môn từ tiếng Anh sang tiếng Việt
+        const subjectMap = {
+            math: 'Toán',
+            physics: 'Lý',
+            chemistry: 'Hóa',
+            history: 'Sử',
+            literature: 'Văn',
+            geography: 'Địa',
+            english: 'Anh',
+            biology: 'Sinh',
+            civiceducation: 'GDCD'
+        };
+
+        const datasets = subjects.map(sub => {
+            const data = ranges.map(r => raw[sub]?.[r] ?? 0);
+            console.log(`Data for ${sub}:`, data);
+            return {
+                label: subjectMap[sub], // Sử dụng tên tiếng Việt từ subjectMap
+                data: data,
+                backgroundColor: colors[sub],
+                borderColor: colors[sub].replace('0.6', '1'),
+                borderWidth: 1,
+                borderRadius: 4
+            };
+        });
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: { labels: ranges, datasets },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false, // Cho phép điều chỉnh kích thước thủ công
+                aspectRatio: 1.5, // Tỷ lệ chiều rộng/chiều cao
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Khoảng Điểm' } },
+                    y: { beginAtZero: true, title: { display: true, text: 'Số Sinh Viên' } }
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

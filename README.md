@@ -4,7 +4,7 @@ This is a Spring Boot-based application designed to manage exam scores by loadin
 - **With the version we deployed the website, there were only about 5000 records because I used the free version of Render, so it was limited, but the local version worked fine.**
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh1.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
 
 ## Prerequisites
@@ -33,15 +33,15 @@ java -jar target/demo-0.0.1-SNAPSHOT.jar
 Open your browser and go to http://localhost:8080 to see the application.
 ## Features
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%20213030.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh1.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
 - Search by registration number.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot_2025-06-29_215507.png" alt="Top 10 Students" title="Top 10 Students in Block A">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh2.png" alt="Top 10 Students" title="Top 10 Students in Block A">
 </p>
 - Top 10 students in block A.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%215507.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh3.png" alt="Application Interface" title="Main Interface of Exam Score Management">
 </p>
 - Statistics of the number of students with scores.
 

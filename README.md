@@ -33,15 +33,16 @@ java -jar target/demo-0.0.1-SNAPSHOT.jar
 Open your browser and go to http://localhost:8080 to see the application.
 ## Features
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh1.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh1.png" alt="Main Interface" title="Main Interface of Exam Score Management">
 </p>
 - Search by registration number.
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh2.png" alt="Top 10 Students" title="Top 10 Students in Block A">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh2.png" alt="Search Feature" title="Search by Registration Number">
 </p>
 - Top 10 students in block A.
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh3.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/anh3.png" alt="Statistics" title="Statistics of Scores">
 </p>
 - Statistics of the number of students with scores.
-

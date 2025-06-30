@@ -37,7 +37,7 @@ Open your browser and go to http://localhost:8080 to see the application.
 </p>
 - Search by registration number.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot%202025-06-29%215458.png" alt="Application Interface" title="Main Interface of Exam Score Management">
+  <img src="https://raw.githubusercontent.com/nguyenvankhanh2010/intern_test/main/Screenshot_2025-06-29_215507.png" alt="Top 10 Students" title="Top 10 Students in Block A">
 </p>
 - Top 10 students in block A.
 <p align="center">
